@@ -1,4 +1,4 @@
-from Inputs import *
+from Inputs import input_product, input_quantity
 from Warehouse import Warehouse, ProductInfo
 from colorama import Fore, Back, Style
 

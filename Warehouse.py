@@ -1,4 +1,4 @@
-from Inputs import *
+from Inputs import input_product, input_price, input_quantity
 from dataclasses import dataclass
 from colorama import Fore, Back, Style
 
