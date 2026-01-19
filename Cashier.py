@@ -1,7 +1,10 @@
 from Inputs import input_product, input_quantity
 from Warehouse import Warehouse, ProductInfo
 from colorama import Fore, Back, Style
+import logging
 
+
+logger = logging.getLogger('store.cashier')
 
 class Cashier(Warehouse):
     def __init__(self):
@@ -12,6 +15,7 @@ class Cashier(Warehouse):
 
     def __str__(self):
         if self._sold_products:
+            logger.info('Вывод отчета за смену')
             header = f'\n{Back.YELLOW}{Fore.BLACK}Отчет за смену:\n'
             report_lines = []
 
@@ -24,6 +28,7 @@ class Cashier(Warehouse):
                       f'Общая выручка: {self._total_income:.2f} BYN\n{Style.RESET_ALL}')
             return header + '\n'.join(report_lines) + footer
         else:
+            logger.warning('Отсутствуют продажи')
             return f'\n{Back.RED}{Fore.BLACK}Продажи отсутствуют\n{Style.RESET_ALL}'
 
     def sell_product(self):
@@ -34,6 +39,7 @@ class Cashier(Warehouse):
             total_price = self._products[product].price * quantity
 
             if quantity == self._products[product].quantity:
+                logger.info(f'Товар {product} распродан')
                 print(f'\n{Back.GREEN}{Fore.BLACK}'
                       f'Товар {product} продан в количестве {quantity}\n'
                       f'Общая стоимость: {total_price} BYN\n'
@@ -43,6 +49,7 @@ class Cashier(Warehouse):
                 # данные в функцию, считающую продажи за день
 
             elif quantity < self._products[product].quantity:
+                logger.info(f'Товар {product} продан')
                 self._products[product].quantity -= quantity # Актуализируем кол-во на складе
                 print(f'\n{Back.GREEN}{Fore.BLACK}'
                       f'Товар {product} продан в количестве {quantity}\n'
@@ -52,11 +59,13 @@ class Cashier(Warehouse):
                 self.sales_report(product, quantity, total_price)
 
             else:
+                logger.warning(f'Попытка продать больше {product}, чем есть на складе')
                 print(f'\n{Back.RED}{Fore.BLACK}'
                       f'Количество {quantity} превышает остаток на складе! '
                       f'({self._products[product].quantity})\n{Style.RESET_ALL}')
 
         else:
+            logger.warning(f'Товар {product} отсутствует на складе')
             print(f'\n{Back.RED}{Fore.BLACK}'
                   f'Товар {product} отсутствует на складе\n{Style.RESET_ALL}')
 
