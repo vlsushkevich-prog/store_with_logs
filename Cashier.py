@@ -4,7 +4,7 @@ from colorama import Fore, Back, Style
 import logging
 
 
-logger = logging.getLogger('store.cashier')
+logger = logging.getLogger('logger.cashier')
 
 class Cashier(Warehouse):
     def __init__(self):

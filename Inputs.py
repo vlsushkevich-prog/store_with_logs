@@ -1,7 +1,7 @@
 from colorama import Fore, Back, Style # Модуль для разукрашивания консоли
 import logging
 
-logger = logging.getLogger('store.inputs')
+logger = logging.getLogger('logger.inputs')
 
 def input_product():
     logger.info('Ввод названия товара')

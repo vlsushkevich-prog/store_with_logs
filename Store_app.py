@@ -1,21 +1,11 @@
 from colorama import Fore, Back, Style
 from Cashier import Cashier
 from Menu import *
+import Logger
 import logging
 
 
-logger = logging.getLogger('store')
-logger.setLevel(logging.DEBUG)
-
-file_handler = logging.FileHandler('logs.txt', encoding='utf-8')
-file_handler.setLevel(logging.DEBUG)
-
-formatter = logging.Formatter('%(asctime)s - %(filename)s - %(levelname)s - %(message)s')
-
-file_handler.setFormatter(formatter)
-
-logger.addHandler(file_handler)
-
+logger = logging.getLogger('logger.main')
 cashier = Cashier()
 state = 'main'
 logger.info('Запуск магазина')

@@ -4,7 +4,7 @@ from colorama import Fore, Back, Style
 import logging
 
 
-logger = logging.getLogger('store.warehouse')
+logger = logging.getLogger('logger.warehouse')
 
 @dataclass
 class ProductInfo:
